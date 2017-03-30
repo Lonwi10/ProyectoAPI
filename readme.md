@@ -10,9 +10,13 @@ Descarregar el repo i instal·lar dependències:
 
 
 $ git clone https://github.com/Lonwi10/ProyectoAPI
+
 $ cd ProyectoAPI
+
 $ composer install
+
 $ cp .env.example .env
+
 $ php artisan key:generate
 Modificar .env:
 

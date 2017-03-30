@@ -1,6 +1,6 @@
 Laravel API
 
-$ sudo apt-get install composer git php7.0 php7.0-mbstring php-sqlite3
+$ sudo apt-get install composer git php7.0 php7.0-mbstring
 
 $ git clone https://github.com/Lonwi10/ProyectoAPI
 

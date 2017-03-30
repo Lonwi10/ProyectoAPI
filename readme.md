@@ -1,13 +1,6 @@
 Laravel API
 
-Instal·lació
-
-Instal·lar Composer, Git i llibreries PHP
-
 $ sudo apt-get install composer git php7.0 php7.0-mbstring php-sqlite3
-Descarregar el repo i instal·lar dependències:
-
-
 
 $ git clone https://github.com/Lonwi10/ProyectoAPI
 

@@ -16,3 +16,9 @@ use Illuminate\Http\Request;
 Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
+
+Route::get('/posicion',function(request $request){
+	$champ = Champion::selectRaw('posicion as variable, count(*) as total')->groupBy("posicion")->get();
+//	$champ = Champion::Select("posicion")->get();
+	return response()->json($champ);
+});

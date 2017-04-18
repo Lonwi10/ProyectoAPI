@@ -33,20 +33,29 @@
 			function mostrarResultado(link){
 				event.preventDefault(); //no recargara la pagina
 				var consulta = link;
-				$.getJSON(consulta, function(result){
-					/*result = JSON.stringify(result);
-					result = result.replace('[','');
-					result = result.replace(']','');
-					result = result.replace('{','');
-					result = result.replace('}','');	
-					result = result.split(",");*/
-					var vari = Object.keys(result[0]);
+				var variable = [];
+				var cantidad = [];
+				$.getJSON(consulta, function(result){				
+					$.each(result,function(index,value){
+						console.log(value);
+						variable.push(value["variable"]);
+						cantidad.push(value["total"]);
+						//console.log(value["variable"]);
+					});
+					
+					/*var vari = Object.keys(result[0]);
 					console.log(vari);
 					console.log(result[0]["variable"]);
+					*/
 
 				});
+				console.log(cantidad);
+				console.log(variable);
 				var a = [90,30,10,80,15];
-				var la = ["AD Carry","Mid","Support","Jungler","Top"];
+				console.log(a);
+				//var a = cantidad;
+				//var la = ["AD Carry","Mid","Support","Jungler","Top"];
+				var la = variable;
 				var barChartData = {
 					labels : la,
 					datasets : [

@@ -1,7 +1,7 @@
 <?php
 
 use Illuminate\Http\Request;
-
+use App\Champion;
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -21,4 +21,9 @@ Route::get('/posicion',function(request $request){
 	$champ = Champion::selectRaw('posicion as variable, count(*) as total')->groupBy("posicion")->get();
 //	$champ = Champion::Select("posicion")->get();
 	return response()->json($champ);
+});
+
+Route::get('/region',function(request $request){
+	$region = Champion::selectRaw('region as variable, count(*) as total')->groupBy("region")->get();
+	return response()->json($region);
 });

@@ -20,8 +20,8 @@
 
 	<div class="caja">
 		<select onchange="mostrarResultado(this.value);">
-			<option id="api" value="">0</option>
 			<option id="api" value="/api/posicion">Posicion</option>
+			<option id="api" value="/api/region">Region</option>
 		</select>
 	</div>
 	<div class="resultados">
@@ -31,40 +31,28 @@
 	<script type="text/javascript">
 		$(document).ready(alert('seleccione una opcion'));
 			function mostrarResultado(link){
+				if (typeof(myPie) !== 'undefined') {
+					myPie.destroy();
+				}
 				event.preventDefault(); //no recargara la pagina
+
 				var consulta = link;
 				var variable = [];
 				var cantidad = [];
 				$.getJSON(consulta, function(result){				
 					$.each(result,function(index,value){
-						console.log(value);
 						variable.push(value["variable"]);
 						cantidad.push(value["total"]);
-						//console.log(value["variable"]);
 					});
-					
-					/*var vari = Object.keys(result[0]);
-					console.log(vari);
-					console.log(result[0]["variable"]);
-					*/
-
-				});
-				console.log(cantidad);
-				console.log(variable);
-				var a = [90,30,10,80,15];
-				console.log(a);
-				//var a = cantidad;
-				//var la = ["AD Carry","Mid","Support","Jungler","Top"];
-				var la = variable;
 				var barChartData = {
-					labels : la,
-					datasets : [
-						{
+				labels : variable,
+				datasets : [
+					{
 							fillColor : "#6b9dfa",
 							strokeColor : "#ffffff",
 							highlightFill: "#1864f2",
 							highlightStroke: "#ffffff",
-							data : a
+							data : cantidad
 						}
 					]
 
@@ -72,6 +60,8 @@
 
 				var ctx = document.getElementById("grafico").getContext("2d");
 				window.myPie = new Chart(ctx).Bar(barChartData, {responsive:true});
+				});
+				
 			}
 		
 

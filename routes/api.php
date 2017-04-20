@@ -27,3 +27,8 @@ Route::get('/region',function(request $request){
 	$region = Champion::selectRaw('region as variable, count(*) as total')->groupBy("region")->get();
 	return response()->json($region);
 });
+
+Route::get('/busqueda/{year}',function(request $request, $year){
+	$busqueda = Champion::selectRaw('region as variable, count(*) as total')->where('year','like',"%".$year."%")->groupBy("region")->get();
+	return response()->json($busqueda);
+});

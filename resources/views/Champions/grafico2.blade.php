@@ -1,3 +1,8 @@
+	@extends('layouts.master')
+
+
+	@section('content')
+
 	<style>
 	.caja{
 		margin: auto;
@@ -19,24 +24,23 @@
 	<script type="text/javascript" src="https://code.jquery.com/jquery-3.2.0.min.js"></script>
 
 	<div class="caja">
-		<select onchange="mostrarResultado(this.value);">
-			<option id="api" value="/api/posicion">Posicion</option>
-			<option id="api" value="/api/region">Region</option>
-		</select>
+		Year: <input type="text" name="year" id="year"><br>
+		<input type="button" value="submit" onclick="mostrarResultado(year.value)">
 	</div>
 	<div class="resultados">
 		<canvas id="grafico"></canvas>
 	</div>
 
 	<script type="text/javascript">
-		$(document).ready(alert('seleccione una opcion'));
-			function mostrarResultado(link){
+		
+			function mostrarResultado(year){
 				if (typeof(myPie) !== 'undefined') {
 					myPie.destroy();
 				}
 				event.preventDefault(); //no recargara la pagina
 
-				var consulta = link;
+				var consulta = "/api/busqueda/";
+				consulta = consulta.concat(year);
 				var variable = [];
 				var cantidad = [];
 				$.getJSON(consulta, function(result){				
@@ -44,22 +48,23 @@
 						variable.push(value["variable"]);
 						cantidad.push(value["total"]);
 					});
-				var barChartData = {
-				labels : variable,
-				datasets : [
-					{
-							fillColor : "#6b9dfa",
-							strokeColor : "#ffffff",
-							highlightFill: "#1864f2",
-							highlightStroke: "#ffffff",
-							data : cantidad
-						}
-					]
+					var barChartData = {
+						labels : variable,
+						datasets : [
+							{
+									fillColor : "#6b9dfa",
+									strokeColor : "#ffffff",
+									highlightFill: "#1864f2",
+									highlightStroke: "#ffffff",
+									data : cantidad
+								}
+							]
 
-				}	
+						}	
 
 				var ctx = document.getElementById("grafico").getContext("2d");
 				window.myPie = new Chart(ctx).Bar(barChartData, {responsive:true});
+
 				});
 				
 			}
@@ -67,4 +72,4 @@
 
 	</script>
 
-
+@endsection

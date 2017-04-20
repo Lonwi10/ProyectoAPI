@@ -11,4 +11,7 @@
 |
 */
 
-Route::get('/', "ChampionController@getHome");
+Route::get('/', "ChampionController@inicio");
+Route::get('/grafico1', "ChampionController@grafico1");
+Route::get('/grafico2', "ChampionController@grafico2");
+Route::get('/externa', "ChampionController@externa");

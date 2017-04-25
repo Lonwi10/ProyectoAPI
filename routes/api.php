@@ -28,7 +28,17 @@ Route::get('/region',function(request $request){
 	return response()->json($region);
 });
 
-Route::get('/busqueda/{year}',function(request $request, $year){
-	$busqueda = Champion::selectRaw('region as variable, count(*) as total')->where('year','like',"%".$year."%")->groupBy("region")->get();
-	return response()->json($busqueda);
+Route::get('/precio',function(request $request){
+	$precio = Champion::selectRaw('precio as variable, count(*) as total')->groupBy("precio")->get();
+	return response()->json($precio);
+});
+
+Route::get('/champ',function(request $request){
+	$champ = Champion::selectRaw('champ as variable, count(*) as total')->groupBy("champ")->get();
+	return response()->json($champ);
+});
+
+Route::get('/year',function(request $request){
+	$year = Champion::selectRaw('year as variable, count(*) as total')->groupBy("year")->get();
+	return response()->json($year);
 });
